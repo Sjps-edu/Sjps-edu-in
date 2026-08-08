@@ -474,6 +474,7 @@
 </div>
 
 <script>
+  
 gsap.registerPlugin(ScrollTrigger);
 
 /* ================= Custom cursor ================= */
@@ -812,17 +813,20 @@ bgMusic.play().then(()=>{
 
 function unmuteOnFirstInteraction(){
   bgMusic.muted = false;
+
   bgMusic.play().then(()=>{
     musicPlaying = true;
     musicBtn.textContent = '❚❚';
   }).catch(()=>{});
+
   ['click','touchstart','keydown','scroll','pointerdown'].forEach(evt=>
     window.removeEventListener(evt, unmuteOnFirstInteraction)
   );
 }
-['click','touchstart','keydown','scroll','pointerdown'].forEach(evt=>
-  window.addEventListener(evt, unmuteOnFirstInteraction, {once:true})
-);
+
+['click','touchstart','keydown','scroll','pointerdown'].forEach(evt=>{
+  window.addEventListener(evt, unmuteOnFirstInteraction, {once:true});
+});
 const melody=[523.25,587.33,659.25,523.25,523.25,587.33,659.25,698.46,783.99,698.46,659.25,587.33]; // simple happy little run (fallback only)
 
 function playNote(freq,startTime,dur,vol){
